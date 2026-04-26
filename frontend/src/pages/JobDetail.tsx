@@ -59,10 +59,16 @@ export const JobDetail = () => {
 
             <div className="prose prose-invert max-w-none">
               <h3 className="text-2xl font-bold text-white mb-4">Project Overview</h3>
-              <div 
-                className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
-                dangerouslySetInnerHTML={{ __html: job.description }}
-              />
+              {job.description ? (
+                <div 
+                  className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
+                  dangerouslySetInnerHTML={{ 
+                    __html: job.description.replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
+                  }}
+                />
+              ) : (
+                <p className="text-slate-500 italic">No detailed description provided for this project.</p>
+              )}
             </div>
           </motion.div>
         </div>
