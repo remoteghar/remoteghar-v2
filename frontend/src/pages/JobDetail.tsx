@@ -57,24 +57,47 @@ export const JobDetail = () => {
               </div>
             </div>
 
-            <div className="prose prose-invert max-w-none">
-              <h3 className="text-2xl font-bold text-white mb-4">Project Overview</h3>
-              {(() => {
-                // Robust description detection
-                const description = job.description || job.job_description || job.desc || job.content;
-                
-                if (description) {
-                  return (
-                    <div 
-                      className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
-                      dangerouslySetInnerHTML={{ 
-                        __html: String(description).replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
-                      }}
-                    />
-                  );
-                }
-                return <p className="text-slate-500 italic">No detailed description provided for this project.</p>;
-              })()}
+            <div className="space-y-8">
+              {/* Project Overview */}
+              <div className="prose prose-invert max-w-none">
+                <h3 className="text-2xl font-bold text-white mb-4">Project Overview</h3>
+                <div 
+                  className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
+                  dangerouslySetInnerHTML={{ 
+                    __html: String(job.about_role || job.description || "").replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
+                  }}
+                />
+              </div>
+
+              {/* Responsibilities */}
+              {job.responsibilities && (
+                <div className="prose prose-invert max-w-none">
+                  <h3 className="text-2xl font-bold text-white mb-4">Key Responsibilities</h3>
+                  <div 
+                    className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
+                    dangerouslySetInnerHTML={{ 
+                      __html: String(job.responsibilities).replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Requirements */}
+              {job.requirements && (
+                <div className="prose prose-invert max-w-none">
+                  <h3 className="text-2xl font-bold text-white mb-4">Requirements & Eligibility</h3>
+                  <div 
+                    className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
+                    dangerouslySetInnerHTML={{ 
+                      __html: String(job.requirements).replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
+                    }}
+                  />
+                </div>
+              )}
+
+              {!job.about_role && !job.description && !job.responsibilities && !job.requirements && (
+                <p className="text-slate-500 italic">No detailed information provided for this project.</p>
+              )}
             </div>
           </motion.div>
         </div>
