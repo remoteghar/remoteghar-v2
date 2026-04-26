@@ -59,16 +59,22 @@ export const JobDetail = () => {
 
             <div className="prose prose-invert max-w-none">
               <h3 className="text-2xl font-bold text-white mb-4">Project Overview</h3>
-              {job.description ? (
-                <div 
-                  className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
-                  dangerouslySetInnerHTML={{ 
-                    __html: job.description.replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
-                  }}
-                />
-              ) : (
-                <p className="text-slate-500 italic">No detailed description provided for this project.</p>
-              )}
+              {(() => {
+                // Robust description detection
+                const description = job.description || job.job_description || job.desc || job.content;
+                
+                if (description) {
+                  return (
+                    <div 
+                      className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{ 
+                        __html: String(description).replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
+                      }}
+                    />
+                  );
+                }
+                return <p className="text-slate-500 italic">No detailed description provided for this project.</p>;
+              })()}
             </div>
           </motion.div>
         </div>
