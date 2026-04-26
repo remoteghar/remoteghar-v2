@@ -5,6 +5,9 @@ import { ChevronLeft, MapPin, Calendar, DollarSign, Shield, FileText, ChevronRig
 import { jobsApi } from '../api';
 import { Card, Badge, Button } from '../components/UI';
 
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
 export const JobDetail = () => {
   const { slug } = useParams();
   const [job, setJob] = useState<any>(null);
@@ -26,6 +29,12 @@ export const JobDetail = () => {
 
   if (loading) return <div className="py-24 text-center">Loading project details...</div>;
   if (!job) return <div className="py-24 text-center">Project not found.</div>;
+
+  const formatContent = (content: string) => {
+    if (!content) return '';
+    // Remove escaped \r\n and handle actual newlines for Markdown
+    return content.replace(/\\r\\n/g, '\n').replace(/\r\n/g, '\n');
+  };
 
   return (
     <div className="py-12 space-y-8">
@@ -57,41 +66,38 @@ export const JobDetail = () => {
               </div>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-12">
               {/* Project Overview */}
               <div className="prose prose-invert max-w-none">
-                <h3 className="text-2xl font-bold text-white mb-4">Project Overview</h3>
-                <div 
-                  className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
-                  dangerouslySetInnerHTML={{ 
-                    __html: String(job.about_role || job.description || "").replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
-                  }}
-                />
+                <h3 className="text-2xl font-bold text-white mb-6 border-l-4 border-primary-500 pl-4">Project Overview</h3>
+                <div className="text-slate-300 leading-relaxed text-lg">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {formatContent(job.about_role || job.description)}
+                  </ReactMarkdown>
+                </div>
               </div>
 
               {/* Responsibilities */}
               {job.responsibilities && (
                 <div className="prose prose-invert max-w-none">
-                  <h3 className="text-2xl font-bold text-white mb-4">Key Responsibilities</h3>
-                  <div 
-                    className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
-                    dangerouslySetInnerHTML={{ 
-                      __html: String(job.responsibilities).replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
-                    }}
-                  />
+                  <h3 className="text-2xl font-bold text-white mb-6 border-l-4 border-primary-500 pl-4">Key Responsibilities</h3>
+                  <div className="text-slate-300 leading-relaxed text-lg">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {formatContent(job.responsibilities)}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               )}
 
               {/* Requirements */}
               {job.requirements && (
                 <div className="prose prose-invert max-w-none">
-                  <h3 className="text-2xl font-bold text-white mb-4">Requirements & Eligibility</h3>
-                  <div 
-                    className="text-slate-300 leading-relaxed text-lg whitespace-pre-wrap"
-                    dangerouslySetInnerHTML={{ 
-                      __html: String(job.requirements).replace(/\\r\\n/g, '<br/>').replace(/\r\n/g, '<br/>') 
-                    }}
-                  />
+                  <h3 className="text-2xl font-bold text-white mb-6 border-l-4 border-primary-500 pl-4">Requirements & Eligibility</h3>
+                  <div className="text-slate-300 leading-relaxed text-lg">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {formatContent(job.requirements)}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               )}
 
