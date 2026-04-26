@@ -2,14 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "@fontsource/dm-serif-display";
+@import "@fontsource/outfit";
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
+  color-scheme: dark;
+  color: #F7F8F9;
+  background-color: #050A10;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,14 +20,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-50;
+    @apply bg-cosmic-950 text-slate-200 antialiased overflow-x-hidden;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 100px 100%;
   }
+
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+.glow-mesh {
+  @apply absolute pointer-events-none;
+  filter: blur(120px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-cosmic-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
 }

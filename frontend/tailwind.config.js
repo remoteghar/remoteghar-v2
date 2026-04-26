@@ -6,7 +6,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Outfit', 'Inter', 'sans-serif'],
+        serif: ['"DM Serif Display"', 'serif'],
+      },
       colors: {
+        cosmic: {
+          950: '#050A10',
+          900: '#0A121C',
+          800: '#111926',
+        },
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
@@ -21,17 +30,22 @@ export default {
           950: '#172554',
         },
         accent: {
+          blue: '#3B82F6',
+          purple: '#8B5CF6',
           yellow: '#fbbf24',
           green: '#10b981',
           red: '#ef4444',
-        },
-        surface: {
-          900: '#0f172a',
-          950: '#020617',
         }
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'glow': 'glow 8s ease-in-out infinite alternate',
+      },
+      keyframes: {
+        glow: {
+          '0%': { opacity: '0.3', transform: 'scale(1) translate(0, 0)' },
+          '100%': { opacity: '0.6', transform: 'scale(1.2) translate(10%, 10%)' },
+        }
       }
     },
   },

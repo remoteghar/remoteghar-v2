@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/dm-serif-display": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
     "@tailwindcss/typography": "^0.5.19",
     "axios": "^1.15.2",
     "clsx": "^2.1.1",

@@ -5,100 +5,128 @@ import { ArrowRight, Sparkles, Shield, Zap, Globe } from 'lucide-react';
 
 export const Home = () => {
   return (
-    <div className="space-y-24 py-12">
+    <div className="space-y-32 py-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        {/* Abstract Background Orbs */}
-        <div className="absolute top-0 -left-20 w-72 h-72 bg-primary-600/20 rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-0 -right-20 w-96 h-96 bg-accent-yellow/10 rounded-full blur-[120px]" />
+      <section className="relative flex flex-col items-center text-center space-y-12 pt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="space-y-6 max-w-5xl"
+        >
+          <Badge variant="success" className="mb-8">
+            <Sparkles size={12} className="mr-2 inline text-primary-400" /> 
+            Global Data Supply Chain
+          </Badge>
+          <h1 className="text-6xl md:text-8xl font-serif text-white leading-[1.1] tracking-tight">
+            The Infrastructure for <br />
+            <span className="text-primary-500 italic">Precision</span> AI Training.
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto font-light leading-relaxed">
+            Remote Ghar provides the high-fidelity human feedback loop required to scale mission-critical AI models. 
+            Trusted by the world's leading research labs.
+          </p>
+        </motion.div>
 
-        <div className="relative flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Badge variant="success" className="mb-4">
-              <Sparkles size={12} className="mr-1 inline" /> Now powered by AI
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
-              Scale your <span className="bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">Workforce</span> <br />
-              with precision.
-            </h1>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="flex flex-wrap items-center justify-center gap-6"
+        >
+          <Button size="lg" variant="primary" className="px-10 py-6 text-lg rounded-full">
+            Start Scaling
+          </Button>
+          <Button size="lg" variant="secondary" className="px-10 py-6 text-lg rounded-full backdrop-blur-sm">
+            Explore Opportunities
+          </Button>
+        </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-lg md:text-xl text-slate-400 max-w-2xl"
-          >
-            Data annotation, transcription, and QA workflows delivered by a global community of experts. 
-            High quality, human-verified data for your AI models.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <Button size="lg" className="group">
-              Get Started <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="secondary">
-              Browse Jobs
-            </Button>
-          </motion.div>
+        {/* Hero Visual (Vertical Lines) */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-20">
+          <div className="w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
       </section>
 
-      {/* Feature Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="flex flex-col gap-4">
-          <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center text-primary-400">
-            <Shield size={24} />
-          </div>
-          <h3 className="text-xl font-bold">Trusted Quality</h3>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            Multi-layer verification ensures your data is accurate and reliable for mission-critical applications.
-          </p>
-        </Card>
+      {/* Feature Bento Grid */}
+      <section className="space-y-16">
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl font-serif text-white">Engineered for Quality</h2>
+          <p className="text-slate-500">A decentralized network of thousands, managed by one platform.</p>
+        </div>
 
-        <Card className="flex flex-col gap-4">
-          <div className="w-12 h-12 bg-accent-yellow/10 rounded-xl flex items-center justify-center text-accent-yellow">
-            <Zap size={24} />
-          </div>
-          <h3 className="text-xl font-bold">Rapid Scaling</h3>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            Onboard hundreds of contributors in days, not weeks. Our platform manages the complexity of scale.
-          </p>
-        </Card>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <Card className="md:col-span-8 group overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-500/10 to-transparent pointer-events-none group-hover:opacity-100 opacity-50 transition-opacity" />
+            <div className="space-y-4 relative z-10">
+               <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-primary-400">
+                <Shield size={20} />
+              </div>
+              <h3 className="text-2xl font-serif text-white">Decentralized Verification</h3>
+              <p className="text-slate-400 max-w-md">
+                Our multi-pass consensus algorithms ensure 99.9% accuracy across millions of data points. 
+                Built for labs that can't afford noise.
+              </p>
+            </div>
+          </Card>
 
-        <Card className="flex flex-col gap-4">
-          <div className="w-12 h-12 bg-accent-green/10 rounded-xl flex items-center justify-center text-accent-green">
-            <Globe size={24} />
-          </div>
-          <h3 className="text-xl font-bold">Global Reach</h3>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            Access a diverse workforce across multiple timezones, languages, and cultural contexts.
-          </p>
-        </Card>
+          <Card className="md:col-span-4 bg-primary-600/5 border-primary-500/10">
+            <div className="space-y-4">
+              <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-primary-400">
+                <Zap size={20} />
+              </div>
+              <h3 className="text-2xl font-serif text-white">Rapid Onboarding</h3>
+              <p className="text-slate-400">
+                Deploy thousands of contributors in under 48 hours.
+              </p>
+            </div>
+          </Card>
+
+          <Card className="md:col-span-4 border-white/5">
+            <div className="space-y-4">
+              <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-accent-purple">
+                <Globe size={20} />
+              </div>
+              <h3 className="text-2xl font-serif text-white">Global Reach</h3>
+              <p className="text-slate-400 text-sm">
+                Access native speakers in 140+ languages across every continent.
+              </p>
+            </div>
+          </Card>
+
+          <Card className="md:col-span-8 bg-white/[0.02] border-white/5">
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              <div className="space-y-4 flex-1">
+                <h3 className="text-2xl font-serif text-white">Real-time Performance</h3>
+                <p className="text-slate-400 text-sm">
+                  Monitor throughput and quality metrics through our live dashboard. 
+                  Full visibility into every contributor's output.
+                </p>
+              </div>
+              <div className="flex-1 grid grid-cols-2 gap-4 w-full">
+                <div className="p-4 bg-white/5 rounded-lg border border-white/5 text-center">
+                  <div className="text-2xl font-bold text-white">1M+</div>
+                  <div className="text-[10px] text-slate-500 uppercase">Tasks/Day</div>
+                </div>
+                <div className="p-4 bg-white/5 rounded-lg border border-white/5 text-center">
+                  <div className="text-2xl font-bold text-white">99.9%</div>
+                  <div className="text-[10px] text-slate-500 uppercase">Accuracy</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 border-y border-white/5 flex flex-wrap justify-around gap-12 text-center">
-        <div>
-          <div className="text-4xl font-bold text-white mb-1">50k+</div>
-          <div className="text-sm text-slate-500 uppercase tracking-widest font-semibold">Active Contributors</div>
-        </div>
-        <div>
-          <div className="text-4xl font-bold text-white mb-1">1M+</div>
-          <div className="text-sm text-slate-500 uppercase tracking-widest font-semibold">Tasks Completed</div>
-        </div>
-        <div>
-          <div className="text-4xl font-bold text-white mb-1">99.9%</div>
-          <div className="text-sm text-slate-500 uppercase tracking-widest font-semibold">Accuracy Rate</div>
+      {/* Trusted By (Logos Placeholder) */}
+      <section className="py-20 text-center space-y-12">
+        <p className="text-slate-600 uppercase tracking-widest text-[10px] font-bold">Trusted by leading AI laboratories</p>
+        <div className="flex flex-wrap justify-center gap-12 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
+           <div className="text-2xl font-serif">OpenAI</div>
+           <div className="text-2xl font-serif">Anthropic</div>
+           <div className="text-2xl font-serif">Mistral</div>
+           <div className="text-2xl font-serif">Meta</div>
+           <div className="text-2xl font-serif">DeepMind</div>
         </div>
       </section>
     </div>

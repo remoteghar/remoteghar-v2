@@ -19,45 +19,45 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
+    <div className="min-h-screen bg-cosmic-950 text-slate-200 flex flex-col font-sans selection:bg-primary-500/30">
       {/* Top Navbar */}
-      <nav className="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/5 px-4 py-3 h-16 flex items-center justify-between">
+      <nav className="fixed top-0 w-full z-50 bg-cosmic-950/50 backdrop-blur-xl border-b border-white/[0.03] px-6 py-4 h-20 flex items-center justify-between">
+        <div className="flex items-center gap-8">
+          <Link to="/" className="flex items-center gap-3 group">
+            <Logo className="group-hover:rotate-12 transition-transform duration-500" />
+            <span className="font-serif text-2xl tracking-tight text-white">Remote<span className="text-primary-500">Ghar</span></span>
+          </Link>
+          
+          <div className="hidden lg:flex items-center gap-8 ml-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`text-sm font-medium tracking-wide transition-all duration-300 hover:text-white ${
+                  location.pathname === link.path ? 'text-white' : 'text-slate-500'
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <div className="flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4 pr-4 border-r border-white/5">
+             <button className="text-sm font-medium text-slate-500 hover:text-white transition-colors">
+              Sign Out
+            </button>
+          </div>
+          <Button size="sm" variant="primary" className="hidden sm:flex">
+            Get Started
+          </Button>
           <button 
-            className="p-2 hover:bg-white/5 rounded-lg md:hidden"
+            className="p-2 hover:bg-white/5 rounded-lg lg:hidden text-white"
             onClick={() => setIsSidebarOpen(true)}
           >
             <Menu size={24} />
           </button>
-          <Link to="/" className="flex items-center gap-3 font-bold text-xl tracking-tight group">
-            <Logo className="group-hover:scale-110 transition-transform" />
-            <span className="hidden sm:inline">Remote<span className="text-primary-500">Ghar</span></span>
-          </Link>
-        </div>
-
-        <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`text-sm font-medium transition-colors hover:text-primary-400 ${
-                location.pathname === link.path ? 'text-primary-400' : 'text-slate-400'
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <div className="h-4 w-px bg-white/10" />
-          <button className="text-sm font-medium text-slate-400 hover:text-white flex items-center gap-2">
-            <LogOut size={18} />
-            <span>Sign Out</span>
-          </button>
-        </div>
-
-        <div className="md:hidden">
-          <div className="w-8 h-8 rounded-full bg-slate-800 border border-white/10 flex items-center justify-center text-xs font-bold">
-            U
-          </div>
         </div>
       </nav>
 
@@ -65,57 +65,63 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       {isSidebarOpen && (
         <>
           <div 
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+            className="fixed inset-0 bg-cosmic-950/80 backdrop-blur-md z-[60]"
             onClick={() => setIsSidebarOpen(false)}
           />
-          <div className="fixed top-0 left-0 h-full w-[280px] bg-slate-900 border-r border-white/10 z-[70] p-6 flex flex-col gap-6 shadow-2xl">
+          <div className="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-cosmic-900 border-l border-white/5 z-[70] p-8 flex flex-col gap-8 shadow-2xl">
             <div className="flex items-center justify-between">
-              <span className="font-bold text-xl">RemoteGhar</span>
-              <button onClick={() => setIsSidebarOpen(false)} className="p-2 hover:bg-white/5 rounded-lg">
-                <X size={24} />
+              <span className="font-serif text-2xl text-white">Remote<span className="text-primary-500">Ghar</span></span>
+              <button onClick={() => setIsSidebarOpen(false)} className="p-2 hover:bg-white/5 rounded-lg text-white">
+                <X size={28} />
               </button>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${
+                  className={`flex items-center gap-4 px-6 py-4 rounded-xl font-medium transition-all ${
                     location.pathname === link.path 
-                      ? 'bg-primary-500/10 text-primary-400' 
-                      : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                      ? 'bg-white/10 text-white' 
+                      : 'text-slate-500 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   {link.icon}
-                  {link.name}
+                  <span className="text-lg">{link.name}</span>
                 </Link>
               ))}
+            </div>
+            <div className="mt-auto pt-8 border-t border-white/5">
+               <Button className="w-full" variant="primary">Sign Out</Button>
             </div>
           </div>
         </>
       )}
 
       {/* Main Content */}
-      <main className="flex-1 pt-16 pb-24 md:pb-0 max-w-7xl mx-auto w-full px-4">
-        {children}
+      <main className="flex-1 pt-20 max-w-[1400px] mx-auto w-full px-6 relative">
+        {/* Ambient Glows */}
+        <div className="glow-mesh w-[500px] h-[500px] bg-primary-600/10 top-[10%] -left-[10%] animate-glow" />
+        <div className="glow-mesh w-[600px] h-[600px] bg-accent-purple/5 bottom-[10%] -right-[10%] animate-glow" style={{ animationDelay: '-4s' }} />
+        
+        <div className="relative z-10">
+          {children}
+        </div>
       </main>
 
-      {/* Mobile Bottom Nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-slate-900 border-t border-white/10 z-50 px-6 py-3 flex justify-between items-center pb-8">
-        {navLinks.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            className={`flex flex-col items-center gap-1 transition-colors ${
-              location.pathname === link.path ? 'text-primary-400' : 'text-slate-500'
-            }`}
-          >
-            {link.icon}
-            <span className="text-[10px] font-medium">{link.name}</span>
-          </Link>
-        ))}
-      </nav>
+      {/* Modern Footer (Simple) */}
+      <footer className="border-t border-white/[0.03] py-12 px-6">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-3">
+            <Logo className="w-8 h-8 opacity-50" />
+            <span className="font-serif text-xl opacity-50">RemoteGhar</span>
+          </div>
+          <div className="text-slate-600 text-sm">
+            © 2026 Remote Ghar. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
